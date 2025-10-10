@@ -99,10 +99,14 @@ export default function BookForm({ onClose, onSave, editBook }: BookFormProps) {
 
           <form onSubmit={handleSubmit} className="space-y-4">
             <div>
-              <label className="block text-sm font-medium mb-2 text-gray-700 dark:text-gray-300">
+              <label
+                htmlFor="book-title"
+                className="block text-sm font-medium mb-2 text-gray-700 dark:text-gray-300"
+              >
                 Title *
               </label>
               <input
+                id="book-title"
                 type="text"
                 required
                 value={formData.title}
@@ -112,10 +116,14 @@ export default function BookForm({ onClose, onSave, editBook }: BookFormProps) {
             </div>
 
             <div>
-              <label className="block text-sm font-medium mb-2 text-gray-700 dark:text-gray-300">
+              <label
+                htmlFor="book-author"
+                className="block text-sm font-medium mb-2 text-gray-700 dark:text-gray-300"
+              >
                 Author *
               </label>
               <input
+                id="book-author"
                 type="text"
                 required
                 value={formData.author}
@@ -126,10 +134,14 @@ export default function BookForm({ onClose, onSave, editBook }: BookFormProps) {
 
             <div className="grid grid-cols-2 gap-4">
               <div>
-                <label className="block text-sm font-medium mb-2 text-gray-700 dark:text-gray-300">
+                <label
+                  htmlFor="book-status"
+                  className="block text-sm font-medium mb-2 text-gray-700 dark:text-gray-300"
+                >
                   Status *
                 </label>
                 <select
+                  id="book-status"
                   value={formData.status}
                   onChange={(e) =>
                     setFormData({ ...formData, status: e.target.value as BookStatus })
@@ -143,10 +155,14 @@ export default function BookForm({ onClose, onSave, editBook }: BookFormProps) {
               </div>
 
               <div>
-                <label className="block text-sm font-medium mb-2 text-gray-700 dark:text-gray-300">
+                <label
+                  htmlFor="book-source"
+                  className="block text-sm font-medium mb-2 text-gray-700 dark:text-gray-300"
+                >
                   Source
                 </label>
                 <select
+                  id="book-source"
                   value={formData.source}
                   onChange={(e) =>
                     setFormData({ ...formData, source: e.target.value as BookSource })
@@ -164,10 +180,14 @@ export default function BookForm({ onClose, onSave, editBook }: BookFormProps) {
 
             <div className="grid grid-cols-2 gap-4">
               <div>
-                <label className="block text-sm font-medium mb-2 text-gray-700 dark:text-gray-300">
+                <label
+                  htmlFor="book-total-pages"
+                  className="block text-sm font-medium mb-2 text-gray-700 dark:text-gray-300"
+                >
                   Total Pages
                 </label>
                 <input
+                  id="book-total-pages"
                   type="number"
                   min="0"
                   value={formData.totalPages || ''}
@@ -182,10 +202,14 @@ export default function BookForm({ onClose, onSave, editBook }: BookFormProps) {
               </div>
 
               <div>
-                <label className="block text-sm font-medium mb-2 text-gray-700 dark:text-gray-300">
+                <label
+                  htmlFor="book-current-page"
+                  className="block text-sm font-medium mb-2 text-gray-700 dark:text-gray-300"
+                >
                   Current Page
                 </label>
                 <input
+                  id="book-current-page"
                   type="number"
                   min="0"
                   value={formData.currentPage || ''}
@@ -202,10 +226,14 @@ export default function BookForm({ onClose, onSave, editBook }: BookFormProps) {
 
             {formData.source === 'library' && (
               <div>
-                <label className="block text-sm font-medium mb-2 text-gray-700 dark:text-gray-300">
+                <label
+                  htmlFor="book-return-date"
+                  className="block text-sm font-medium mb-2 text-gray-700 dark:text-gray-300"
+                >
                   Return Date
                 </label>
                 <input
+                  id="book-return-date"
                   type="date"
                   value={formData.returnDate || ''}
                   onChange={(e) => setFormData({ ...formData, returnDate: e.target.value })}
@@ -216,10 +244,14 @@ export default function BookForm({ onClose, onSave, editBook }: BookFormProps) {
 
             {(formData.status === 'currently-reading' || formData.status === 'want-to-read') && (
               <div>
-                <label className="block text-sm font-medium mb-2 text-gray-700 dark:text-gray-300">
+                <label
+                  htmlFor="book-deadline"
+                  className="block text-sm font-medium mb-2 text-gray-700 dark:text-gray-300"
+                >
                   Reading Deadline
                 </label>
                 <input
+                  id="book-deadline"
                   type="date"
                   value={formData.deadline || ''}
                   onChange={(e) => setFormData({ ...formData, deadline: e.target.value })}
@@ -229,10 +261,14 @@ export default function BookForm({ onClose, onSave, editBook }: BookFormProps) {
             )}
 
             <div>
-              <label className="block text-sm font-medium mb-2 text-gray-700 dark:text-gray-300">
+              <label
+                htmlFor="book-image"
+                className="block text-sm font-medium mb-2 text-gray-700 dark:text-gray-300"
+              >
                 Cover Image (max 500KB)
               </label>
               <input
+                id="book-image"
                 type="file"
                 accept="image/*"
                 onChange={handleImageChange}
@@ -244,10 +280,14 @@ export default function BookForm({ onClose, onSave, editBook }: BookFormProps) {
             </div>
 
             <div>
-              <label className="block text-sm font-medium mb-2 text-gray-700 dark:text-gray-300">
+              <label
+                htmlFor="book-notes"
+                className="block text-sm font-medium mb-2 text-gray-700 dark:text-gray-300"
+              >
                 Notes
               </label>
               <textarea
+                id="book-notes"
                 value={formData.notes || ''}
                 onChange={(e) => setFormData({ ...formData, notes: e.target.value })}
                 rows={3}

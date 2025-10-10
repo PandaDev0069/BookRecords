@@ -60,7 +60,7 @@
 
 ### Unit & Component Tests ✅ PASSING
 
-```
+```text
 Test Suites: 3 passed, 3 total
 Tests:       31 passed, 31 total
 Snapshots:   0 total
