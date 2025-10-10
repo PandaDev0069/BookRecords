@@ -30,7 +30,7 @@ npm run test:ci
 npm run test:e2e
 ```
 
-###Run E2E Tests with UI
+### Run E2E Tests with UI
 
 ```bash
 npm run test:e2e:ui
@@ -63,7 +63,7 @@ Current test coverage (Unit + Component tests):
 
 Location: `app/__tests__/storage.test.ts`
 
-### What's Tested
+### Scope of Tests
 
 #### `calculateDailyGoal()`
 
@@ -141,7 +141,7 @@ npm test -- Stats.test.tsx
 
 Location: `e2e/app.spec.ts`
 
-### What's Tested
+### Key Scenarios
 
 #### Core Functionality
 
@@ -295,21 +295,21 @@ test('should perform user action', async ({ page }) => {
 
 ## Best Practices
 
-### Unit Tests
+### Unit Test Best Practices
 
 - Test one thing per test
 - Use descriptive test names
 - Mock external dependencies
 - Test edge cases
 
-### Component Tests
+### Component Test Best Practices
 
 - Test user interactions
 - Verify rendered output
 - Test accessibility
 - Use Testing Library best practices
 
-### E2E Tests
+### E2E Test Best Practices
 
 - Test real user workflows
 - Keep tests independent
@@ -327,6 +327,7 @@ test('should perform user action', async ({ page }) => {
    ```
 
 2. Reinstall dependencies:
+
    ```bash
    rm -rf node_modules
    npm install
@@ -341,6 +342,7 @@ test('should perform user action', async ({ page }) => {
    ```
 
 2. Check if dev server is running:
+
    ```bash
    npm run dev
    ```
