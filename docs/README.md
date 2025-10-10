@@ -9,6 +9,8 @@ Comprehensive reference for the Book Records Next.js application. The main `READ
 - [UUID Implementation Details](./UUID_IMPLEMENTATION.md)
 - [Prettier Setup](./PRETTIER_SETUP.md)
 - [Prettier Configuration Summary](./PRETTIER_SUMMARY.md)
+- [Roadmap](./ROADMAP.md)
+- [Release Notes Template](./RELEASE_TEMPLATE.md)
 
 ## Project Overview
 

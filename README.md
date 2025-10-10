@@ -35,11 +35,15 @@ Detailed guides now live in `docs/`:
 - [Testing guide](docs/TESTING.md)
 - [UUID implementation notes](docs/UUID_IMPLEMENTATION.md)
 - [Prettier setup](docs/PRETTIER_SETUP.md)
+- [Roadmap](docs/ROADMAP.md)
+- [Release notes template](docs/RELEASE_TEMPLATE.md)
 
 ## Need Help?
 
 - Check the docs folder for setup, testing, and tooling details
 - Export your data before clearing the browser storage
 - Open an issue on GitHub if something looks off
+
+Stay current by reviewing the [changelog](CHANGELOG.md) before upgrading.
 
 Happy reading!
