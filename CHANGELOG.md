@@ -9,6 +9,7 @@ All notable changes to this project will be documented in this file. The format 
 ### Changed
 
 - Refined book list, stats, and control panel styling for a cleaner visual hierarchy.
+- Normalized imported numeric book IDs to trimmed strings to prevent downstream type conflicts.
 
 ## [1.0.1] - 2025-10-11
 

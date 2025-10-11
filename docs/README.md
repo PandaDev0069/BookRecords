@@ -75,6 +75,7 @@ npm run build
 - **Track progress**: Update the current page or status directly within a book card.
 - **Manage deadlines**: Add library return dates and deadlines to trigger reminders and goal calculations.
 - **Backup data**: Use export/import actions to save or restore your library as JSON.
+- **Import sanitation**: JSON imports automatically normalize numeric IDs to strings before validation.
 
 ## Customization
 

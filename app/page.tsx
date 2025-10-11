@@ -106,13 +106,16 @@ export default function Home() {
           if (!book || typeof book !== 'object') {
             errors.push('not an object');
           } else {
-            // Validate id (must be string or number, non-empty if string)
+            // Validate id (must resolve to non-empty string)
+            if (typeof book.id === 'number') {
+              book.id = String(book.id);
+            }
+
             if (typeof book.id === 'string') {
-              if (book.id.trim() === '') {
+              book.id = book.id.trim();
+              if (book.id === '') {
                 errors.push('id is empty string');
               }
-            } else if (typeof book.id === 'number') {
-              // Numbers are acceptable
             } else {
               errors.push('id missing or invalid type');
             }
