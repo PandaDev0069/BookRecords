@@ -30,19 +30,6 @@ export default function BookCard({ book, onEdit, onDelete }: BookCardProps) {
     return Math.max(0, Math.min(calculatedProgress, 100));
   })();
 
-  const getStatusColor = (status: string) => {
-    switch (status) {
-      case 'currently-reading':
-        return 'bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-200';
-      case 'want-to-read':
-        return 'bg-yellow-100 text-yellow-800 dark:bg-yellow-900 dark:text-yellow-200';
-      case 'completed':
-        return 'bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-200';
-      default:
-        return 'bg-gray-100 text-gray-800 dark:bg-gray-700 dark:text-gray-200';
-    }
-  };
-
   const getSourceBadge = (source: string) => {
     const colors = {
       library: 'bg-purple-100 text-purple-800 dark:bg-purple-900 dark:text-purple-200',
@@ -55,15 +42,15 @@ export default function BookCard({ book, onEdit, onDelete }: BookCardProps) {
   };
 
   return (
-    <div className="bg-white dark:bg-gray-800 rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow">
-      <div className="flex gap-4 p-4">
+    <div className="bg-gradient-to-br from-white via-white to-blue-50/20 dark:from-gray-800 dark:via-gray-800 dark:to-gray-800/80 border border-gray-200 dark:border-gray-700 rounded-xl shadow-md hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1">
+      <div className="flex gap-4 p-4 sm:p-5">
         {/* Book Cover */}
         <div className="flex-shrink-0">
           {book.image ? (
             // eslint-disable-next-line @next/next/no-img-element
-            <img src={book.image} alt={book.title} className="w-24 h-32 object-cover rounded" />
+            <img src={book.image} alt={book.title} className="w-24 h-32 object-cover rounded-lg" />
           ) : (
-            <div className="w-24 h-32 bg-gray-200 dark:bg-gray-700 rounded flex items-center justify-center">
+            <div className="w-24 h-32 bg-gray-100 dark:bg-gray-700 rounded-lg flex items-center justify-center">
               <svg
                 className="w-12 h-12 text-gray-400"
                 fill="none"
@@ -83,15 +70,21 @@ export default function BookCard({ book, onEdit, onDelete }: BookCardProps) {
 
         {/* Book Info */}
         <div className="flex-1 min-w-0">
-          <div className="flex items-start justify-between gap-2 mb-2">
-            <h3 className="text-lg font-semibold text-gray-900 dark:text-white truncate">
-              {book.title}
-            </h3>
+          <div className="flex items-start justify-between gap-2 mb-3">
+            <div>
+              <p className="text-xs font-semibold uppercase tracking-wide text-blue-600 dark:text-blue-300">
+                {book.status.replace(/-/g, ' ')}
+              </p>
+              <h3 className="text-xl font-semibold text-gray-900 dark:text-white truncate">
+                {book.title}
+              </h3>
+              <p className="text-sm text-gray-500 dark:text-gray-400 mt-0.5">{book.author}</p>
+            </div>
             <div className="flex gap-2">
               <button
                 type="button"
                 onClick={() => onEdit(book)}
-                className="text-blue-600 hover:text-blue-800 dark:text-blue-400"
+                className="inline-flex items-center justify-center w-9 h-9 rounded-full bg-blue-50 text-blue-600 hover:bg-blue-100 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-blue-500 dark:bg-blue-900/30 dark:text-blue-200 dark:hover:bg-blue-900/50"
                 title="Edit"
                 aria-label={`Edit ${book.title || 'book'}`}
               >
@@ -107,7 +100,7 @@ export default function BookCard({ book, onEdit, onDelete }: BookCardProps) {
               <button
                 type="button"
                 onClick={() => onDelete(book.id)}
-                className="text-red-600 hover:text-red-800 dark:text-red-400"
+                className="inline-flex items-center justify-center w-9 h-9 rounded-full bg-red-50 text-red-600 hover:bg-red-100 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-red-500 dark:bg-red-900/30 dark:text-red-200 dark:hover:bg-red-900/50"
                 title="Delete"
                 aria-label={`Delete ${book.title || 'book'}`}
               >
@@ -123,14 +116,7 @@ export default function BookCard({ book, onEdit, onDelete }: BookCardProps) {
             </div>
           </div>
 
-          <p className="text-sm text-gray-600 dark:text-gray-400 mb-3">by {book.author}</p>
-
-          <div className="flex flex-wrap gap-2 mb-3">
-            <span
-              className={`px-2 py-1 rounded text-xs font-medium ${getStatusColor(book.status)}`}
-            >
-              {book.status.replace(/-/g, ' ')}
-            </span>
+          <div className="flex flex-wrap gap-2 mb-4">
             <span
               className={`px-2 py-1 rounded text-xs font-medium ${getSourceBadge(book.source)}`}
             >
@@ -140,16 +126,34 @@ export default function BookCard({ book, onEdit, onDelete }: BookCardProps) {
 
           {/* Progress Bar */}
           {book.totalPages && book.currentPage !== undefined && (
-            <div className="mb-3">
-              <div className="flex justify-between text-xs text-gray-600 dark:text-gray-400 mb-1">
+            <div className="mb-4 group/progress">
+              <div className="flex justify-between text-xs text-gray-600 dark:text-gray-400 mb-2 font-medium">
                 <span>
                   Progress: {book.currentPage} / {book.totalPages} pages
                 </span>
-                <span>{progress}%</span>
+                <span className="font-semibold text-gray-700 dark:text-gray-300">{progress}%</span>
               </div>
-              <div className="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-2">
+              <div className="relative w-full bg-gray-200 dark:bg-gray-700 rounded-full h-2.5 overflow-hidden shadow-inner">
                 <div
-                  className="bg-blue-600 h-2 rounded-full transition-all"
+                  className="h-2.5 bg-gradient-to-r from-blue-500 via-indigo-500 to-purple-500 rounded-full transition-all duration-500 ease-out relative overflow-hidden"
+                  style={{ width: `${progress}%` }}
+                >
+                  {/* Animated shimmer effect */}
+                  <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/30 to-transparent animate-shimmer" />
+                  {/* Striped pattern for in-progress books */}
+                  {progress > 0 && progress < 100 && (
+                    <div
+                      className="absolute inset-0 opacity-20"
+                      style={{
+                        backgroundImage:
+                          'repeating-linear-gradient(45deg, transparent, transparent 10px, rgba(255,255,255,.5) 10px, rgba(255,255,255,.5) 20px)',
+                      }}
+                    />
+                  )}
+                </div>
+                {/* Glow effect on hover */}
+                <div
+                  className="absolute top-0 left-0 h-2.5 bg-gradient-to-r from-blue-400 via-indigo-400 to-purple-400 rounded-full opacity-0 group-hover/progress:opacity-50 blur-sm transition-opacity duration-300"
                   style={{ width: `${progress}%` }}
                 />
               </div>
@@ -158,10 +162,10 @@ export default function BookCard({ book, onEdit, onDelete }: BookCardProps) {
 
           {/* Daily Goal */}
           {dailyGoal && dailyGoal.daysRemaining > 0 && (
-            <div className="mb-2 p-2 bg-blue-50 dark:bg-blue-900/20 rounded text-sm">
-              <p className="text-blue-800 dark:text-blue-200">
-                📚 Read <strong>{dailyGoal.pagesPerDay} pages/day</strong> to finish in{' '}
-                {dailyGoal.daysRemaining} days
+            <div className="mb-3 p-3 rounded-lg bg-blue-50/70 dark:bg-blue-900/30 text-sm border border-blue-100 dark:border-blue-900">
+              <p className="text-blue-800 dark:text-blue-200 font-medium">
+                Read {dailyGoal.pagesPerDay} pages/day to finish in {dailyGoal.daysRemaining}{' '}
+                {dailyGoal.daysRemaining === 1 ? 'day' : 'days'}
               </p>
             </div>
           )}
@@ -169,17 +173,17 @@ export default function BookCard({ book, onEdit, onDelete }: BookCardProps) {
           {/* Return Date Warning */}
           {book.returnDate && (
             <div
-              className={`mb-2 p-2 rounded text-sm ${
+              className={`mb-3 p-3 rounded-lg text-sm border ${
                 isOverdue(book.returnDate)
-                  ? 'bg-red-50 dark:bg-red-900/20 text-red-800 dark:text-red-200'
+                  ? 'bg-red-50 dark:bg-red-900/20 text-red-800 dark:text-red-200 border-red-100 dark:border-red-900'
                   : getDaysUntil(book.returnDate) <= 3
-                    ? 'bg-orange-50 dark:bg-orange-900/20 text-orange-800 dark:text-orange-200'
-                    : 'bg-purple-50 dark:bg-purple-900/20 text-purple-800 dark:text-purple-200'
+                    ? 'bg-orange-50 dark:bg-orange-900/20 text-orange-800 dark:text-orange-200 border-orange-100 dark:border-orange-900'
+                    : 'bg-purple-50 dark:bg-purple-900/20 text-purple-800 dark:text-purple-200 border-purple-100 dark:border-purple-900'
               }`}
             >
               <p>
-                {isOverdue(book.returnDate) ? '⚠️ OVERDUE' : '📅'} Return by:{' '}
-                {formatDate(book.returnDate)}
+                {isOverdue(book.returnDate) ? 'Overdue return' : 'Library return by'}{' '}
+                <strong>{formatDate(book.returnDate)}</strong>
                 {!isOverdue(book.returnDate) && ` (${getDaysUntil(book.returnDate)} days left)`}
               </p>
             </div>
@@ -188,17 +192,17 @@ export default function BookCard({ book, onEdit, onDelete }: BookCardProps) {
           {/* Deadline Warning */}
           {book.deadline && !book.returnDate && (
             <div
-              className={`mb-2 p-2 rounded text-sm ${
+              className={`mb-3 p-3 rounded-lg text-sm border ${
                 isOverdue(book.deadline)
-                  ? 'bg-red-50 dark:bg-red-900/20 text-red-800 dark:text-red-200'
+                  ? 'bg-red-50 dark:bg-red-900/20 text-red-800 dark:text-red-200 border-red-100 dark:border-red-900'
                   : getDaysUntil(book.deadline) <= 5
-                    ? 'bg-orange-50 dark:bg-orange-900/20 text-orange-800 dark:text-orange-200'
-                    : 'bg-blue-50 dark:bg-blue-900/20 text-blue-800 dark:text-blue-200'
+                    ? 'bg-orange-50 dark:bg-orange-900/20 text-orange-800 dark:text-orange-200 border-orange-100 dark:border-orange-900'
+                    : 'bg-blue-50 dark:bg-blue-900/20 text-blue-800 dark:text-blue-200 border-blue-100 dark:border-blue-900'
               }`}
             >
               <p>
-                {isOverdue(book.deadline) ? '⚠️ OVERDUE' : '🎯'} Deadline:{' '}
-                {formatDate(book.deadline)}
+                {isOverdue(book.deadline) ? 'Deadline passed' : 'Reading deadline'}{' '}
+                <strong>{formatDate(book.deadline)}</strong>
                 {!isOverdue(book.deadline) && ` (${getDaysUntil(book.deadline)} days left)`}
               </p>
             </div>
@@ -206,8 +210,8 @@ export default function BookCard({ book, onEdit, onDelete }: BookCardProps) {
 
           {/* Notes */}
           {book.notes && (
-            <p className="text-sm text-gray-600 dark:text-gray-400 italic line-clamp-2">
-              &ldquo;{book.notes}&rdquo;
+            <p className="text-sm text-gray-600 dark:text-gray-400 italic line-clamp-2 border-l-2 border-gray-200 dark:border-gray-700 pl-3">
+              {book.notes}
             </p>
           )}
         </div>

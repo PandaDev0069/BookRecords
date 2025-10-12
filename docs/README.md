@@ -6,9 +6,12 @@ Comprehensive reference for the Book Records Next.js application. The main `READ
 
 - [Testing Guide](./TESTING.md)
 - [Testing Summary](./TEST-SUMMARY.md)
+- [UI/UX Visual Enhancements](./UI_ENHANCEMENTS.md)
 - [UUID Implementation Details](./UUID_IMPLEMENTATION.md)
 - [Prettier Setup](./PRETTIER_SETUP.md)
 - [Prettier Configuration Summary](./PRETTIER_SUMMARY.md)
+- [Roadmap](./ROADMAP.md)
+- [Release Notes Template](./RELEASE_TEMPLATE.md)
 
 ## Project Overview
 
@@ -73,6 +76,7 @@ npm run build
 - **Track progress**: Update the current page or status directly within a book card.
 - **Manage deadlines**: Add library return dates and deadlines to trigger reminders and goal calculations.
 - **Backup data**: Use export/import actions to save or restore your library as JSON.
+- **Import sanitation**: JSON imports automatically normalize numeric IDs to strings before validation.
 
 ## Customization
 

@@ -90,8 +90,8 @@ export default function BookForm({ onClose, onSave, editBook }: BookFormProps) {
   };
 
   return (
-    <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 z-50">
-      <div className="bg-white dark:bg-gray-800 rounded-lg max-w-2xl w-full max-h-[90vh] overflow-y-auto">
+    <div className="fixed inset-0 bg-black/60 backdrop-blur-sm flex items-center justify-center p-4 z-50 animate-fadeIn">
+      <div className="bg-gradient-to-br from-white via-white to-blue-50/30 dark:from-gray-800 dark:via-gray-800 dark:to-gray-900/50 rounded-2xl max-w-2xl w-full max-h-[90vh] overflow-y-auto shadow-2xl animate-slideUp border border-gray-200 dark:border-gray-700">
         <div className="p-6">
           <h2 className="text-2xl font-bold mb-6 text-gray-900 dark:text-white">
             {editBook ? 'Edit Book' : 'Add New Book'}
@@ -298,14 +298,14 @@ export default function BookForm({ onClose, onSave, editBook }: BookFormProps) {
             <div className="flex gap-3 pt-4">
               <button
                 type="submit"
-                className="flex-1 bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700 transition-colors"
+                className="flex-1 bg-gradient-to-r from-blue-600 via-indigo-600 to-purple-600 text-white px-4 py-2.5 rounded-lg font-semibold hover:from-blue-500 hover:via-indigo-500 hover:to-purple-500 shadow-lg hover:shadow-xl transition-all duration-200 transform hover:scale-105"
               >
                 {editBook ? 'Update Book' : 'Add Book'}
               </button>
               <button
                 type="button"
                 onClick={onClose}
-                className="flex-1 bg-gray-300 dark:bg-gray-600 text-gray-800 dark:text-white px-4 py-2 rounded-md hover:bg-gray-400 dark:hover:bg-gray-500 transition-colors"
+                className="flex-1 bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-white px-4 py-2.5 rounded-lg font-semibold hover:bg-gray-300 dark:hover:bg-gray-600 shadow hover:shadow-lg transition-all duration-200"
               >
                 Cancel
               </button>

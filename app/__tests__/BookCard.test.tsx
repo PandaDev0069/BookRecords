@@ -66,7 +66,7 @@ describe('BookCard Component', () => {
 
     render(<BookCard book={libraryBook} onEdit={mockOnEdit} onDelete={mockOnDelete} />);
 
-    expect(screen.getByText(/Return by:/i)).toBeTruthy();
+    expect(screen.getByText(/Library return by/i)).toBeTruthy();
     expect(screen.getByText(/2 days left/i)).toBeTruthy();
   });
 

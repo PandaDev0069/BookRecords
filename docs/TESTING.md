@@ -4,11 +4,10 @@ This document provides comprehensive information about testing the Book Records 
 
 ## Test Suite Overview
 
-The application includes three types of tests:
+The application includes two types of tests:
 
 1. **Unit Tests** - Test individual functions and utilities
 2. **Component Tests** - Test React components in isolation
-3. **E2E Tests** - Test complete user workflows
 
 ## Running Tests
 
@@ -24,40 +23,16 @@ npm test
 npm run test:ci
 ```
 
-### Run E2E Tests
-
-```bash
-npm run test:e2e
-```
-
-### Run E2E Tests with UI
-
-```bash
-npm run test:e2e:ui
-```
-
-### Run E2E Tests in Debug Mode
-
-```bash
-npm run test:e2e:debug
-```
-
-### Run All Tests
-
-```bash
-npm run test:all
-```
-
 ## Test Coverage
 
 Current test coverage (Unit + Component tests):
 
-- **Overall**: ~65% statement coverage
-- **Utils**: 65% - Testing core business logic
-- **Components**: 45% - Testing UI components
+- **Overall**: ~84% statement coverage
+- **Utils**: 71% - Testing core business logic
+- **Components**: 94% - Testing UI components
   - Stats: 100% coverage
-  - BookCard: 92% coverage
-  - BookForm: Covered via E2E tests
+  - BookCard: 97% coverage
+  - BookForm: 91% coverage
 
 ## Unit Tests
 
@@ -137,48 +112,6 @@ npm test -- BookCard.test.tsx
 npm test -- Stats.test.tsx
 ```
 
-## E2E Tests
-
-Location: `e2e/app.spec.ts`
-
-### Key Scenarios
-
-#### Core Functionality
-
-- Display main page with header and stats
-- Add a new book successfully
-- Calculate daily reading goal with deadline
-- Edit an existing book
-- Delete a book
-- Filter books by status
-- Search books
-- Export and import data
-- Track library book return date
-- Update stats when books are added
-- Handle form cancellation
-- Show empty state when no books
-
-### Running E2E Tests
-
-```bash
-# Run all E2E tests
-npm run test:e2e
-
-# Run in UI mode for debugging
-npm run test:e2e:ui
-
-# Run in debug mode (step through)
-npm run test:e2e:debug
-```
-
-### E2E Test Reports
-
-After running E2E tests, a detailed HTML report is generated:
-
-- Location: `playwright-report/index.html`
-- Open automatically after test run
-- Includes screenshots and traces for failures
-
 ## Debugging Tests
 
 ### VS Code Debugging
@@ -187,7 +120,6 @@ The project includes debug configurations in `.vscode/launch.json`:
 
 1. **Jest: Run All Tests** - Run all unit/component tests with debugger
 2. **Jest: Debug Current Test File** - Debug the currently open test file
-3. **Playwright: Debug E2E Tests** - Debug Playwright E2E tests
 
 ### Using the Debugger
 
@@ -207,12 +139,6 @@ npm test
 
 # Run with verbose output
 npm test -- --verbose
-
-# Run E2E tests headed (see browser)
-npx playwright test --headed
-
-# Run single E2E test
-npx playwright test --grep "should add a new book"
 ```
 
 ## CI/CD Integration
@@ -230,17 +156,11 @@ The project includes a comprehensive CI workflow (`.github/workflows/ci.yml`) th
    - ESLint validation
    - TypeScript type checking
 
-2. **Unit Tests**
-   - Runs all Jest tests
-   - Generates coverage reports
-   - Uploads to Codecov
+2. **Unit and Component Tests**
+   - Runs Jest with coverage
+   - Uploads coverage reports to Codecov
 
-3. **E2E Tests**
-   - Installs Playwright browsers
-   - Runs all E2E tests
-   - Uploads test reports as artifacts
-
-4. **Build**
+3. **Build**
    - Builds production bundle
    - Uploads build artifacts
 
@@ -248,8 +168,7 @@ The project includes a comprehensive CI workflow (`.github/workflows/ci.yml`) th
 
 - Check the "Actions" tab in GitHub
 - View test results and coverage
-- Download test artifacts
-- Review E2E test reports
+- Download test artifacts if needed
 
 ## Writing New Tests
 
@@ -283,16 +202,6 @@ describe('YourComponent', () => {
 })
 ```
 
-### Adding an E2E Test
-
-```typescript
-test('should perform user action', async ({ page }) => {
-  await page.goto('/');
-  await page.getByRole('button', { name: /Click Me/i }).click();
-  await expect(page.getByText('Result')).toBeVisible();
-});
-```
-
 ## Best Practices
 
 ### Unit Test Best Practices
@@ -309,13 +218,6 @@ test('should perform user action', async ({ page }) => {
 - Test accessibility
 - Use Testing Library best practices
 
-### E2E Test Best Practices
-
-- Test real user workflows
-- Keep tests independent
-- Use semantic selectors (role, label, text)
-- Clean up test data
-
 ## Troubleshooting
 
 ### Tests Failing Locally
@@ -331,20 +233,6 @@ test('should perform user action', async ({ page }) => {
    ```bash
    rm -rf node_modules
    npm install
-   ```
-
-### E2E Tests Timing Out
-
-1. Increase timeout in test:
-
-   ```typescript
-   test.setTimeout(60000);
-   ```
-
-2. Check if dev server is running:
-
-   ```bash
-   npm run dev
    ```
 
 ### Coverage Issues
@@ -368,5 +256,4 @@ open coverage/lcov-report/index.html
 
 - [Jest Documentation](https://jestjs.io/)
 - [React Testing Library](https://testing-library.com/react)
-- [Playwright Documentation](https://playwright.dev/)
 - [Testing Best Practices](https://kentcdodds.com/blog/common-mistakes-with-react-testing-library)

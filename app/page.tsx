@@ -106,13 +106,16 @@ export default function Home() {
           if (!book || typeof book !== 'object') {
             errors.push('not an object');
           } else {
-            // Validate id (must be string or number, non-empty if string)
+            // Validate id (must resolve to non-empty string)
+            if (typeof book.id === 'number') {
+              book.id = String(book.id);
+            }
+
             if (typeof book.id === 'string') {
-              if (book.id.trim() === '') {
+              book.id = book.id.trim();
+              if (book.id === '') {
                 errors.push('id is empty string');
               }
-            } else if (typeof book.id === 'number') {
-              // Numbers are acceptable
             } else {
               errors.push('id missing or invalid type');
             }
@@ -187,11 +190,13 @@ export default function Home() {
   };
 
   return (
-    <main className="min-h-screen bg-gray-50 dark:bg-gray-900">
+    <main className="min-h-screen bg-gradient-to-br from-gray-50 via-blue-50/20 to-indigo-50/30 dark:from-gray-900 dark:via-gray-900 dark:to-gray-800">
       <div className="max-w-7xl mx-auto px-4 py-8">
         {/* Header */}
         <div className="mb-8">
-          <h1 className="text-4xl font-bold text-gray-900 dark:text-white mb-2">📚 Book Records</h1>
+          <h1 className="text-4xl font-bold bg-gradient-to-r from-gray-900 via-blue-900 to-indigo-900 dark:from-white dark:via-blue-100 dark:to-indigo-100 bg-clip-text text-transparent mb-2">
+            📚 Book Records
+          </h1>
           <p className="text-gray-600 dark:text-gray-400">
             Track your reading journey, manage deadlines, and achieve your reading goals
           </p>
@@ -201,8 +206,8 @@ export default function Home() {
         <Stats books={books} />
 
         {/* Controls */}
-        <div className="bg-white dark:bg-gray-800 rounded-lg shadow p-4 mb-6">
-          <div className="flex flex-col md:flex-row gap-4">
+        <div className="bg-gradient-to-br from-white via-white to-blue-50/30 dark:from-gray-800 dark:via-gray-800 dark:to-gray-800/50 border border-gray-200 dark:border-gray-700 rounded-xl shadow-lg backdrop-blur-sm p-4 sm:p-5 mb-6">
+          <div className="flex flex-col md:flex-row gap-4 md:items-center">
             {/* Search */}
             <div className="flex-1">
               <input
@@ -211,7 +216,7 @@ export default function Home() {
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
                 aria-label="Search books"
-                className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:text-white"
+                className="w-full rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 px-4 py-2 text-sm text-gray-900 dark:text-white shadow-inner focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-blue-500 dark:focus-visible:ring-offset-gray-900"
               />
             </div>
 
@@ -220,7 +225,7 @@ export default function Home() {
               value={filterStatus}
               onChange={(e) => setFilterStatus(e.target.value as BookStatus | 'all')}
               aria-label="Filter books by status"
-              className="px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:text-white"
+              className="rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 px-4 py-2 text-sm text-gray-900 dark:text-white shadow-inner focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-blue-500 dark:focus-visible:ring-offset-gray-900"
             >
               <option value="all">All Books</option>
               <option value="currently-reading">Currently Reading</option>
@@ -231,21 +236,21 @@ export default function Home() {
             {/* Add Book Button */}
             <button
               onClick={handleAddBook}
-              className="px-6 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition-colors whitespace-nowrap"
+              className="inline-flex items-center justify-center whitespace-nowrap rounded-lg bg-gradient-to-r from-blue-600 via-indigo-600 to-purple-600 px-6 py-2 text-sm font-semibold text-white shadow-lg hover:shadow-xl hover:from-blue-500 hover:via-indigo-500 hover:to-purple-500 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-blue-500 transition-all duration-200 transform hover:scale-105"
             >
               + Add Book
             </button>
           </div>
 
           {/* Import/Export */}
-          <div className="flex gap-2 mt-4">
+          <div className="flex flex-wrap gap-2 mt-4">
             <button
               onClick={handleExportData}
-              className="px-4 py-1 text-sm bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-white rounded hover:bg-gray-300 dark:hover:bg-gray-600 transition-colors"
+              className="inline-flex items-center rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 px-4 py-2 text-sm font-medium text-gray-700 dark:text-gray-200 shadow-sm hover:bg-gray-50 dark:hover:bg-gray-600 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-blue-500"
             >
               📥 Export Data
             </button>
-            <label className="px-4 py-1 text-sm bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-white rounded hover:bg-gray-300 dark:hover:bg-gray-600 transition-colors cursor-pointer">
+            <label className="inline-flex items-center rounded-lg border border-dashed border-gray-300 dark:border-gray-600 bg-white/60 dark:bg-gray-700/60 px-4 py-2 text-sm font-medium text-gray-700 dark:text-gray-200 shadow-sm hover:bg-white dark:hover:bg-gray-700 transition-colors cursor-pointer">
               📤 Import Data
               <input type="file" accept=".json" onChange={handleImportData} className="hidden" />
             </label>
@@ -255,25 +260,92 @@ export default function Home() {
         {/* Book List */}
         <div className="space-y-4">
           {filteredBooks.length === 0 ? (
-            <div className="bg-white dark:bg-gray-800 rounded-lg shadow p-12 text-center">
-              <svg
-                className="w-16 h-16 mx-auto text-gray-400 mb-4"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"
-                />
-              </svg>
-              <p className="text-gray-600 dark:text-gray-400 text-lg">
-                {searchQuery || filterStatus !== 'all'
-                  ? 'No books found matching your criteria'
-                  : 'No books yet. Add your first book to get started!'}
-              </p>
+            <div className="bg-gradient-to-br from-white via-blue-50/30 to-indigo-50/30 dark:from-gray-800 dark:via-gray-800 dark:to-gray-800/95 border border-gray-200 dark:border-gray-700 rounded-2xl shadow-lg p-12 text-center relative overflow-hidden">
+              {/* Decorative background elements */}
+              <div className="absolute top-0 right-0 w-64 h-64 bg-gradient-to-br from-blue-400/10 to-purple-400/10 rounded-full blur-3xl animate-pulse" />
+              <div className="absolute bottom-0 left-0 w-64 h-64 bg-gradient-to-tr from-indigo-400/10 to-cyan-400/10 rounded-full blur-3xl animate-pulse delay-1000" />
+
+              <div className="relative z-10">
+                {/* Animated book icon */}
+                <div className="inline-block animate-float">
+                  <svg
+                    className="w-20 h-20 mx-auto text-gray-400 dark:text-gray-500 mb-6"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={1.5}
+                      d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"
+                    />
+                  </svg>
+                </div>
+
+                {searchQuery || filterStatus !== 'all' ? (
+                  <>
+                    <h3 className="text-2xl font-bold text-gray-800 dark:text-gray-200 mb-3">
+                      No Books Found
+                    </h3>
+                    <p className="text-gray-600 dark:text-gray-400 text-lg mb-6 max-w-md mx-auto">
+                      We couldn&apos;t find any books matching your search criteria. Try adjusting
+                      your filters or search terms.
+                    </p>
+                    <button
+                      onClick={() => {
+                        setSearchQuery('');
+                        setFilterStatus('all');
+                      }}
+                      className="inline-flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-blue-600 to-indigo-600 text-white rounded-lg font-semibold shadow-lg hover:shadow-xl hover:from-blue-500 hover:to-indigo-500 transition-all duration-200 transform hover:scale-105"
+                    >
+                      <svg
+                        className="w-5 h-5"
+                        fill="none"
+                        stroke="currentColor"
+                        viewBox="0 0 24 24"
+                      >
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          strokeWidth={2}
+                          d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"
+                        />
+                      </svg>
+                      Clear Filters
+                    </button>
+                  </>
+                ) : (
+                  <>
+                    <h3 className="text-2xl font-bold text-gray-800 dark:text-gray-200 mb-3">
+                      Start Your Reading Journey
+                    </h3>
+                    <p className="text-gray-600 dark:text-gray-400 text-lg mb-6 max-w-md mx-auto">
+                      Your library is empty. Add your first book and begin tracking your reading
+                      adventures!
+                    </p>
+                    <button
+                      onClick={handleAddBook}
+                      className="inline-flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-blue-600 to-indigo-600 text-white rounded-lg font-semibold shadow-lg hover:shadow-xl hover:from-blue-500 hover:to-indigo-500 transition-all duration-200 transform hover:scale-105"
+                    >
+                      <svg
+                        className="w-5 h-5"
+                        fill="none"
+                        stroke="currentColor"
+                        viewBox="0 0 24 24"
+                      >
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          strokeWidth={2}
+                          d="M12 4v16m8-8H4"
+                        />
+                      </svg>
+                      Add Your First Book
+                    </button>
+                  </>
+                )}
+              </div>
             </div>
           ) : (
             filteredBooks.map((book) => (
