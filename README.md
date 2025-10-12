@@ -25,7 +25,7 @@ Open `http://localhost:3000` to begin managing your library.
 
 - Next.js 14+ (App Router) with TypeScript and Tailwind CSS
 - Client-side persistence via `localStorage`
-- Tested with Jest, React Testing Library, and Playwright
+- Tested with Jest and React Testing Library
 - Deployed on Vercel (one-click deploy ready)
 
 ## Documentation

@@ -28,6 +28,10 @@ All notable changes to this project will be documented in this file. The format 
 - Normalized imported numeric book IDs to trimmed strings to prevent downstream type conflicts.
 - Updated test assertions to match new UI text ("Library return by" instead of "Return by:").
 
+### Removed
+
+- Playwright E2E tests and dependencies (focusing on unit and component tests for release cycle efficiency).
+
 ## [1.0.1] - 2025-10-11
 
 ### Added
