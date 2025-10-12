@@ -17,7 +17,8 @@ Open `http://localhost:3000` to begin managing your library.
 
 - Organize books by status with rich metadata and optional cover images
 - Track deadlines and daily reading goals with built-in reminders
-- Monitor progress with a stats dashboard and smart ordering
+- Monitor progress with enhanced animated progress bars and real-time statistics
+- Modern, polished UI with gradient designs and smooth animations
 - Search, filter, export, and import your data as JSON backups
 
 ## Tech Overview
@@ -33,6 +34,7 @@ Detailed guides now live in `docs/`:
 
 - [Full documentation index](docs/README.md)
 - [Testing guide](docs/TESTING.md)
+- [UI/UX visual enhancements](docs/UI_ENHANCEMENTS.md)
 - [UUID implementation notes](docs/UUID_IMPLEMENTATION.md)
 - [Prettier setup](docs/PRETTIER_SETUP.md)
 - [Roadmap](docs/ROADMAP.md)

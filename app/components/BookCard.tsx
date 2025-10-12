@@ -42,7 +42,7 @@ export default function BookCard({ book, onEdit, onDelete }: BookCardProps) {
   };
 
   return (
-    <div className="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-xl shadow-sm hover:shadow-md transition-all duration-200">
+    <div className="bg-gradient-to-br from-white via-white to-blue-50/20 dark:from-gray-800 dark:via-gray-800 dark:to-gray-800/80 border border-gray-200 dark:border-gray-700 rounded-xl shadow-md hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1">
       <div className="flex gap-4 p-4 sm:p-5">
         {/* Book Cover */}
         <div className="flex-shrink-0">
@@ -126,16 +126,34 @@ export default function BookCard({ book, onEdit, onDelete }: BookCardProps) {
 
           {/* Progress Bar */}
           {book.totalPages && book.currentPage !== undefined && (
-            <div className="mb-4">
-              <div className="flex justify-between text-xs text-gray-600 dark:text-gray-400 mb-1 font-medium">
+            <div className="mb-4 group/progress">
+              <div className="flex justify-between text-xs text-gray-600 dark:text-gray-400 mb-2 font-medium">
                 <span>
                   Progress: {book.currentPage} / {book.totalPages} pages
                 </span>
-                <span>{progress}%</span>
+                <span className="font-semibold text-gray-700 dark:text-gray-300">{progress}%</span>
               </div>
-              <div className="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-2 overflow-hidden">
+              <div className="relative w-full bg-gray-200 dark:bg-gray-700 rounded-full h-2.5 overflow-hidden shadow-inner">
                 <div
-                  className="h-2 bg-gradient-to-r from-blue-500 via-indigo-500 to-purple-500 transition-all"
+                  className="h-2.5 bg-gradient-to-r from-blue-500 via-indigo-500 to-purple-500 rounded-full transition-all duration-500 ease-out relative overflow-hidden"
+                  style={{ width: `${progress}%` }}
+                >
+                  {/* Animated shimmer effect */}
+                  <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/30 to-transparent animate-shimmer" />
+                  {/* Striped pattern for in-progress books */}
+                  {progress > 0 && progress < 100 && (
+                    <div
+                      className="absolute inset-0 opacity-20"
+                      style={{
+                        backgroundImage:
+                          'repeating-linear-gradient(45deg, transparent, transparent 10px, rgba(255,255,255,.5) 10px, rgba(255,255,255,.5) 20px)',
+                      }}
+                    />
+                  )}
+                </div>
+                {/* Glow effect on hover */}
+                <div
+                  className="absolute top-0 left-0 h-2.5 bg-gradient-to-r from-blue-400 via-indigo-400 to-purple-400 rounded-full opacity-0 group-hover/progress:opacity-50 blur-sm transition-opacity duration-300"
                   style={{ width: `${progress}%` }}
                 />
               </div>

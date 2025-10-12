@@ -303,7 +303,12 @@ describe('Home Page - Import Validation', () => {
     fireEvent.change(input);
 
     await waitFor(() => {
-      expect(storageUtils.saveBooks).toHaveBeenCalledWith(validData);
+      expect(storageUtils.saveBooks).toHaveBeenCalledWith([
+        {
+          ...validData[0],
+          id: '12345', // Numeric IDs are normalized to strings
+        },
+      ]);
     });
   });
 

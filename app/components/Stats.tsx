@@ -63,17 +63,23 @@ export default function Stats({ books }: StatsProps) {
         <div
           key={card.id}
           data-testid={card.id}
-          className="relative overflow-hidden rounded-xl border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 p-4 shadow-sm"
+          className="group relative overflow-hidden rounded-xl border border-gray-200 dark:border-gray-700 bg-gradient-to-br from-white via-white to-gray-50 dark:from-gray-800 dark:via-gray-800 dark:to-gray-900 p-4 shadow-md hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1"
         >
           <div
-            className={`absolute -bottom-10 -right-12 h-24 w-24 bg-gradient-to-br ${card.accent} opacity-20 blur-2xl`}
+            className={`absolute -bottom-10 -right-12 h-24 w-24 bg-gradient-to-br ${card.accent} opacity-20 blur-2xl group-hover:opacity-30 transition-opacity duration-300`}
+            aria-hidden="true"
+          />
+          <div
+            className={`absolute top-0 left-0 w-1 h-full bg-gradient-to-b ${card.accent} opacity-50`}
             aria-hidden="true"
           />
           <div className="relative">
-            <p className="text-xs font-semibold uppercase tracking-wide text-gray-500 dark:text-gray-400">
+            <p className="text-xs font-semibold uppercase tracking-wide text-gray-500 dark:text-gray-400 mb-1">
               {card.label}
             </p>
-            <p className="mt-2 text-3xl font-semibold text-gray-900 dark:text-white">{card.value}</p>
+            <p className="mt-2 text-3xl font-bold bg-gradient-to-br from-gray-900 to-gray-600 dark:from-white dark:to-gray-300 bg-clip-text text-transparent group-hover:scale-110 transition-transform duration-300 inline-block">
+              {card.value}
+            </p>
           </div>
         </div>
       ))}

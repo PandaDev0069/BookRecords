@@ -6,6 +6,7 @@ Comprehensive reference for the Book Records Next.js application. The main `READ
 
 - [Testing Guide](./TESTING.md)
 - [Testing Summary](./TEST-SUMMARY.md)
+- [UI/UX Visual Enhancements](./UI_ENHANCEMENTS.md)
 - [UUID Implementation Details](./UUID_IMPLEMENTATION.md)
 - [Prettier Setup](./PRETTIER_SETUP.md)
 - [Prettier Configuration Summary](./PRETTIER_SUMMARY.md)
