@@ -156,18 +156,11 @@ The project includes a comprehensive CI workflow (`.github/workflows/ci.yml`) th
    - ESLint validation
    - TypeScript type checking
 
-2. **Unit Tests**
-   - Runs all Jest tests
-   - Generates coverage reports
-   - Uploads to Codecov
-
-3. **E2E Tests**
-
-4. **Unit and Component Tests**
+2. **Unit and Component Tests**
    - Runs Jest with coverage
    - Uploads coverage reports to Codecov
 
-5. **Build**
+3. **Build**
    - Builds production bundle
    - Uploads build artifacts
 
@@ -242,20 +235,6 @@ describe('YourComponent', () => {
    npm install
    ```
 
-### E2E Tests Timing Out
-
-1. Increase timeout in test:
-
-   ```typescript
-   test.setTimeout(60000);
-   ```
-
-2. Check if dev server is running:
-
-   ```bash
-   npm run dev
-   ```
-
 ### Coverage Issues
 
 View detailed coverage report:
@@ -277,5 +256,4 @@ open coverage/lcov-report/index.html
 
 - [Jest Documentation](https://jestjs.io/)
 - [React Testing Library](https://testing-library.com/react)
-- [Playwright Documentation](https://playwright.dev/)
 - [Testing Best Practices](https://kentcdodds.com/blog/common-mistakes-with-react-testing-library)
