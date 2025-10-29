@@ -23,7 +23,7 @@ Book Records is a lightweight reading tracker built for college students. It run
 
 - Track multiple statuses: Currently Reading, Want to Read, Completed
 - Record different sources: Library, Personal, Borrowed, Digital, Other
-- Store cover images as base64 strings (500KB limit)
+- Store cover images as base64 strings (5MB limit)
 - Capture rich metadata: title, author, pages, progress, and notes
 
 ### Deadline Management
