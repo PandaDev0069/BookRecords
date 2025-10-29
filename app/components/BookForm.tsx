@@ -80,9 +80,9 @@ export default function BookForm({ onClose, onSave, editBook }: BookFormProps) {
   const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.files && e.target.files[0]) {
       const file = e.target.files[0];
-      if (file.size > 500000) {
-        // 500KB limit
-        alert('Image size should be less than 500KB');
+      if (file.size > 5000000) {
+        // 5MB limit
+        alert('Image size should be less than 5MB');
         return;
       }
       setImageFile(file);
@@ -265,7 +265,7 @@ export default function BookForm({ onClose, onSave, editBook }: BookFormProps) {
                 htmlFor="book-image"
                 className="block text-sm font-medium mb-2 text-gray-700 dark:text-gray-300"
               >
-                Cover Image (max 500KB)
+                Cover Image (max 5MB)
               </label>
               <input
                 id="book-image"

@@ -18,7 +18,7 @@ This is a Next.js book tracking application for college students with comprehens
 - Library book return date tracking with overdue warnings
 - Reading deadline management
 - Daily page goal calculator
-- Image storage using base64 encoding (500KB limit per image)
+- Image storage using base64 encoding (5MB limit per image)
 - Export/Import JSON data with validation
 - Search and filter functionality
 - Statistics dashboard
@@ -37,7 +37,7 @@ This is a Next.js book tracking application for college students with comprehens
 
 - **Memoization**: Use `useMemo()` for expensive computations (filtering, sorting)
 - **Callback Optimization**: Use `useCallback()` for event handlers passed to child components
-- **Image Optimization**: Enforce 500KB limit on base64 images, compress before storage
+- **Image Optimization**: Enforce 5MB limit on base64 images, compress before storage
 - **Lazy Loading**: Consider code splitting for components not needed on initial render
 
 ### Accessibility
